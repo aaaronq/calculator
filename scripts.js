@@ -1,6 +1,6 @@
 
 input = document.getElementById('input');
-console.log(input.innerText);
+calculation = document.getElementById('calculation')
 
 buttons = document.querySelectorAll('.button');
 buttons.forEach(button => button.addEventListener("click", (e) => enterInput(e.target)));
@@ -11,12 +11,15 @@ let decimal = false;
 function enterInput (number) {
     if (number.innerText === "CLEAR") {
         input.innerText = "";
+        calculation.innerText = "";
         operatorSelected = "";
+        decimal = false;
         return;
     }
 
     if (number.innerText === "DELETE") {
-        if (checkLastNumber() === "operator") operatorSelected = "";
+        if (checkLastNumber() === "decimal") decimal = false;
+        else if (checkLastNumber() === "operator") operatorSelected = "";
         if (input.innerText.length > 0) {
             input.innerText = input.innerText.slice(0, input.innerText.length - 1);
         }
@@ -24,41 +27,49 @@ function enterInput (number) {
     }
     if (input.innerText.length > 14) return;
     if (number.classList.contains("operator")) {
-        if (!operatorSelected) {
-            if (number.innerText === "=") return;
-            operatorSelected = number.innerText;
-        }
-        else 
-        {
-            if (checkLastNumber() === "number") {
-                console.log(Number(input.innerText[input.innerText.length - 1]));
-                answer = calculate();
-                input.innerText = answer; 
-                operatorSelected = "";
-                return;
-            }
-            else{
-                return;
-            }
-        }
+        handleOperator(number);
+        return;
     }
     input.innerText += number.innerText;
 }
 
+function handleOperator(operator) {
+    if (operator.innerText === "." && decimal === true) return;
+    if (operator.innerText === "." && decimal === false) {
+        decimal = true;
+        input.innerText += ".";
+        return;
+    }
+    if (!operatorSelected) {
+        if (operator.innerText === "=") return;
+        operatorSelected = operator.innerText;
+        input.innerText += operatorSelected;
+        decimal = false;
+    }
+    else if (checkLastNumber() === "number") {
+        if (operator.innerText === ".") return;
+        answer = calculate();
+        input.innerText = Math.round((answer + Number.EPSILON) * 100000) / 100000;
+        operatorSelected = "";
+        decimal = false;
+        return;
+    }
+}
+
 function checkLastNumber() {
-    const lastNumber = Number(input.innerText[input.innerText.length - 1]);
+    let lastNumber = input.innerText[input.innerText.length - 1];
+    if (lastNumber === ".") return "decimal";
+    lastNumber = Number(lastNumber);
     if (lastNumber) return "number";
-    else return "operator"
+    else return "operator";
 }
 
 function calculate() {
-    console.log(operatorSelected)
     const string = input.innerText.split(operatorSelected);
-    console.log(string);
     const a = Number(string[0]);
     const b = Number(string[1]);
-    if (!a || !b) console.error("No a or b");
-    console.log(`Calculation: ${a} ${operatorSelected} ${b}`)
+    calculation.innerText = `${a} ${operatorSelected} ${b}`;
+    console.log(`${a} ${operatorSelected} ${b}`)
     switch (operatorSelected) {
         case "x":
             return a * b;

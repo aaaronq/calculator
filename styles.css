@@ -33,6 +33,7 @@ html, body {
 
 .display {
     display: flex;
+    flex-direction: column;
     justify-content: end;
     background-color: rgb(243, 239, 239); 
     width: 530px;
@@ -104,9 +105,20 @@ html, body {
     align-self:flex-end;
     width: 500px;
     height: 60px;
-    
     text-align: end;
     font-size: 65px;
     margin-right: 15px;
     margin-bottom: 10px;
+}   
+
+#calculation {
+    justify-self: center;
+    align-self: flex-start;
+    width: 500px;
+    height: 60px;
+    text-align: start;
+    font-size: 42px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    color: gray;
 }   
