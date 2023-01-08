@@ -59,6 +59,10 @@ function enterInput (number) {
 }
 
 function handleOperator(operator) {
+    if (operator.innerText === "-" && checkLastNumber() === "operator" && input.innerText[input.innerText.length - 1] != "-") {
+        input.innerText += operator.innerText;
+        return; 
+    }
     if (operator.innerText === "." && decimal === true) return;
     if (operator.innerText === "." && decimal === false) {
         decimal = true;
@@ -74,6 +78,7 @@ function handleOperator(operator) {
     else if (checkLastNumber() === "number") {
         if (operator.innerText === ".") return;
         answer = calculate();
+        console.log("answer = ", answer);
         input.innerText = Math.round((answer + Number.EPSILON) * 100000) / 100000;
         operatorSelected = "";
         if (input.innerText.includes(".")) decimal = true;
@@ -84,16 +89,27 @@ function handleOperator(operator) {
 
 function checkLastNumber() {
     let lastNumber = input.innerText[input.innerText.length - 1];
+    console.log(lastNumber);
     if (lastNumber === ".") return "decimal";
     lastNumber = Number(lastNumber);
-    if (lastNumber) return "number";
+    console.log(Number(lastNumber))
+    if (!isNaN(lastNumber)) return "number";
     else return "operator";
 }
 
 function calculate() {
     const string = input.innerText.split(operatorSelected);
-    const a = Number(string[0]);
-    const b = Number(string[1]);
+    console.log(string);
+    let a = 0;
+    let b = 0;
+    if (string.length === 3) {
+        a = Number("-" + string[1]);
+        b = Number("-" + string[2]);
+    }
+    else{
+        a = Number(string[0]);
+        b = Number(string[1]);
+    }
     calculation.innerText = `${a} ${operatorSelected} ${b}`;
     console.log(`${a} ${operatorSelected} ${b}`)
     switch (operatorSelected) {
