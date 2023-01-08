@@ -8,6 +8,27 @@ buttons.forEach(button => button.addEventListener("click", (e) => enterInput(e.t
 let operatorSelected = "";
 let decimal = false;
 
+// Listen for keyboard input
+
+document.addEventListener('keydown', (e) => {
+    console.log(e.key);
+    if (e.key.length != 1 && e.key != "Backspace") return;
+    if (e.key === "/") e.preventDefault();
+    console.log(e.key);
+    const number = e.key.match(/[0-9]/gi) != null;
+    const operator = e.key.match(/[.x*=/+\-]/g) != null;
+    const backspace = (e.key === "Backspace");
+    if (number === false && operator === false && backspace === false) return;
+    keyInput = document.createElement('div');
+    if (operator === true) {
+        keyInput.classList.add('operator');
+    }
+    keyInput.innerText = e.key;
+    console.log(keyInput.innerText)
+    enterInput(keyInput);
+    keyInput.remove();
+})
+
 function enterInput (number) {
     if (number.innerText === "CLEAR") {
         input.innerText = "";
@@ -17,7 +38,7 @@ function enterInput (number) {
         return;
     }
 
-    if (number.innerText === "DELETE") {
+    if (number.innerText === "DELETE" || number.innerText === "Backspace") {
         if (checkLastNumber() === "decimal") decimal = false;
         else if (checkLastNumber() === "operator") operatorSelected = "";
         if (input.innerText.length > 0) {
@@ -71,8 +92,10 @@ function calculate() {
     calculation.innerText = `${a} ${operatorSelected} ${b}`;
     console.log(`${a} ${operatorSelected} ${b}`)
     switch (operatorSelected) {
+        case "*":
         case "x":
             return a * b;
+        case "/":
         case "÷":
             return a / b;
         case "+":
