@@ -14,8 +14,8 @@ html, body {
 .calculator {
     display: flex;
     flex-flow: column wrap;
-    height: 900px;
-    width: 575px;
+    height: 70vh;
+    width: 22vw;
     background-color: violet;
     border-radius: 30px;
     border: 8px solid rgb(238, 160, 238);
