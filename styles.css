@@ -1,8 +1,3 @@
-@viewport {
-      width: device-width ;
-      zoom: 1.0 ;
-    } 
-
 html, body {
     margin: 0;
     padding: 0;
@@ -14,18 +9,17 @@ html, body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100vw;
 }
 
 .calculator {
     display: flex;
     flex-flow: column wrap;
-    height: 70vh;
-    width: 22vw;
+    height: 630px;
+    width: 403px;
     background-color: violet;
-    border-radius: 30px;
-    border: 8px solid rgb(238, 160, 238);
-    box-shadow: 8px 4px rgb(238, 160, 238);
+    border-radius: 20px;
+    border: 6px solid rgb(238, 160, 238);
+    box-shadow: 6px 3px rgb(238, 160, 238);
 }
 
 .displaycontainer {
@@ -33,9 +27,9 @@ html, body {
     justify-content: center;
     align-items: center;
     align-self: center;
-    width: 20vw;
-    height: 225px;
-    border-radius: 30px;
+    width: 385px;
+    height: 158px;
+    border-radius: 21px;
 }
 
 .display {
@@ -43,36 +37,36 @@ html, body {
     flex-direction: column;
     justify-content: end;
     background-color: rgb(243, 239, 239); 
-    width: 530px;
-    height: 150px;
-    border-radius: 30px;
+    width: 371px;
+    height: 115px;
+    border-radius: 21px;
 }
 
 .buttons {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 13px;
-    margin-top: 25px;
+    gap: 9px;
+    margin-top: 17px;
 }
 
 .button{
     background-color: rgb(255, 255, 255);
-    width: 115px;
-    height: 115px;
-    line-height: 115px;
+    width: 81px;
+    height: 81px;
+    line-height: 81px;
     text-align: center;
-    font-size: 60px;
-    border-radius: 10px;
-    border: 3px solid rgb(68, 8, 68);;
+    font-size: 42px;
+    border-radius: 7px;
+    border: 2px solid rgb(68, 8, 68);;
 }
 
 .bigbutton {
-    width: 243px;
-    height: 90px;
-    line-height: 90px;
-    font-size: 40px;
-    border-radius: 20px;
+    width: 170px;
+    height: 63px;
+    line-height: 63px;
+    font-size: 28px;
+    border-radius: 15px;
 }
 
 .button:hover {
@@ -110,22 +104,22 @@ html, body {
 .input {
     justify-self: center;
     align-self:flex-end;
-    width: 500px;
-    height: 60px;
+    width: 350px;
+    height: 42px;
     text-align: end;
-    font-size: 65px;
-    margin-right: 15px;
+    font-size: 46px;
+    margin-right: 10px;
     margin-bottom: 10px;
 }   
 
 #calculation {
     justify-self: center;
     align-self: flex-start;
-    width: 500px;
-    height: 60px;
+    width: 350px;
+    height: 42px;
     text-align: start;
-    font-size: 42px;
-    margin-left: 10px;
+    font-size: 29px;
+    margin-left: 13px;
     margin-bottom: 10px;
     color: gray;
 }   
