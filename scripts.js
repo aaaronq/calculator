@@ -40,7 +40,11 @@ function enterInput (number) {
 
     if (number.innerText === "DELETE" || number.innerText === "Backspace") {
         if (checkLastNumber() === "decimal") decimal = false;
-        else if (checkLastNumber() === "operator") operatorSelected = "";
+        else if (checkLastNumber() === "operator") {
+            operatorSelected = "";
+            if (input.innerText.includes(".")) decimal = true;
+            else decimal = false;
+            }
         if (input.innerText.length > 0) {
             input.innerText = input.innerText.slice(0, input.innerText.length - 1);
         }
@@ -72,7 +76,8 @@ function handleOperator(operator) {
         answer = calculate();
         input.innerText = Math.round((answer + Number.EPSILON) * 100000) / 100000;
         operatorSelected = "";
-        decimal = false;
+        if (input.innerText.includes(".")) decimal = true;
+        else decimal = false;
         return;
     }
 }
