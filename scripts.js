@@ -11,23 +11,23 @@ let decimal = false;
 // Listen for keyboard input
 
 document.addEventListener('keydown', (e) => {
-    console.log(e.key);
-    if (e.key.length != 1 && e.key != "Backspace") return;
+    if (e.key.length !== 1 && e.key !== "Backspace" && e.key !== "Enter") return;
     if (e.key === "/") e.preventDefault();
-    console.log(e.key);
     const number = e.key.match(/[0-9]/gi) != null;
     const operator = e.key.match(/[.x*=/+\-]/g) != null;
     const backspace = (e.key === "Backspace");
-    if (number === false && operator === false && backspace === false) return;
+    const enter = (e.key === "Enter");
+    if (number === false && operator === false && backspace === false && enter === false) return;
     keyInput = document.createElement('div');
-    if (operator === true) {
+    if (operator === true || e.key === "Enter") {
         keyInput.classList.add('operator');
     }
     keyInput.innerText = e.key;
-    console.log(keyInput.innerText)
+    if (e.key === "Enter") keyInput.innerText = "=";
+    console.log(keyInput.innerText);
     enterInput(keyInput);
     keyInput.remove();
-})
+});
 
 function enterInput (number) {
     if (number.innerText === "CLEAR") {
