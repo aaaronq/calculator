@@ -5,6 +5,7 @@ html, body {
 
 .container {
     background-image: url(background.jpg);
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,7 +109,7 @@ html, body {
     height: 42px;
     text-align: end;
     font-size: 46px;
-    margin-right: 10px;
+    margin-right: 12px;
     margin-bottom: 10px;
 }   
 
