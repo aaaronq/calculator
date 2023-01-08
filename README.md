@@ -1,3 +1,2 @@
 # calculator
-
-#### Final project of The Odin Project foundations.
+Final project of The Odin Project foundations.
